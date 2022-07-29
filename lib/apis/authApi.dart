@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 class AuthApi{
 
-  String baseUrl = "http://192.168.1.188:1337/api/";
+  String baseUrl = "http://2.59.117.205:1337/api/";
 
   Future login(String usernmae , String password) async {
     var url = Uri.parse(baseUrl+"auth/user/login");
