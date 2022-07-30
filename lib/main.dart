@@ -13,9 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
-        buttonTheme: ButtonThemeData(
-          buttonColor: CustomColors().baseColor,
-        ),  
+        appBarTheme: const AppBarTheme(
+          elevation:0,
+          backgroundColor: Colors.transparent,
+
+        ),
       ),
       home:const FirstPage(),
     );

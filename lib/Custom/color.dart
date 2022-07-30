@@ -9,4 +9,6 @@ class CustomColors{
   final quillGrey = const Color(0xffd4d4d4);
 
   final baseBlack = const Color(0xff1a283a);
+
+  final beyaz = const Color(0xffffffff);
 }

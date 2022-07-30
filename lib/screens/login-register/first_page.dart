@@ -4,6 +4,7 @@ import 'package:kirtasite/Custom/color.dart';
 import 'package:kirtasite/Custom/size.dart';
 import 'package:kirtasite/Image/png_image.dart';
 import 'package:kirtasite/screens/login-register/login.dart';
+import 'package:kirtasite/screens/login-register/register.dart';
 
 import '../../Custom/content.dart';
 
@@ -39,7 +40,7 @@ class _FirstPageState extends State<FirstPage> {
               const SizedBox(height: 100,),
               Padding(
                 padding: CustomSize().paddingHorizontal,
-                child: OutlinedButton(
+                child: TextButton(
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                   },
@@ -51,10 +52,13 @@ class _FirstPageState extends State<FirstPage> {
                   style: CustomButton().buttonStyle,
                 ),
               ),
+              const SizedBox(height:10),
               Padding(
                 padding: CustomSize().paddingHorizontal,
-                child: OutlinedButton(
-                  onPressed: () {},
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                  },
                   child: Text(
                     CustomContent().register,
                     style: Theme.of(context)

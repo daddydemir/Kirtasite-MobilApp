@@ -10,5 +10,8 @@ class CustomContent{
   final String forgot = "Parolamı unutum.";
   final String user = "User";
   final String kirtasite = "Kırtasiye";
+  final String mail = "E-mail";
+  final String telNo = "Telefon";
+  final String telNoStart = "+90 ";
 
 }

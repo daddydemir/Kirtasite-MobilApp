@@ -13,10 +13,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
+  final _pageController = PageController();
 
-final _pageController = PageController();
   bool secureText = true;
-
+  
   void changeSecureText() {
     setState(() {
       secureText = !secureText;
@@ -38,7 +39,7 @@ final _pageController = PageController();
       ),
       body: Padding(
         padding: CustomSize().paddingHorizontal,
-        child: Center(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -51,25 +52,11 @@ final _pageController = PageController();
               const SizedBox(
                 height: 50,
               ),
-              Row(children: [
-                _optionsSelectUser(CustomContent().user),
-                _optionsSelectKirtasiye(CustomContent().kirtasite),
-              ]),
+              
               const SizedBox(
                 height: 50,
               ),
-              SizedBox(
-                height: 150,
-                child: PageView(
-                  controller: _pageController,
-                  children: [
-                    _userLogin(),
-                    const Center(
-                      child: Text("Save"),
-                    ),
-                  ],
-                ),
-              ),
+              _userLogin(),
               const SizedBox(
                 height: 50,
               ),
@@ -79,7 +66,7 @@ final _pageController = PageController();
               const SizedBox(
                 height: 50,
               ),
-              OutlinedButton(
+              TextButton(
                 onPressed: () {},
                 style: CustomButton().buttonStyle,
                 child: Text(CustomContent().login,
@@ -122,56 +109,6 @@ final _pageController = PageController();
           ),
         ),
       ],
-    );
-  }
-
-  Widget _optionsSelectUser(String optionName) {
-    return Expanded(
-      child: SizedBox(
-        height: 50,
-        child: InkWell(
-          onTap: () {
-            _pageController.previousPage(duration: const Duration(seconds:1), curve: Curves.slowMiddle);
-          },
-          highlightColor: Colors.transparent,
-          splashFactory: NoSplash.splashFactory,
-          child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 15,
-              child: Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  optionName,
-                ),
-              )),
-        ),
-      ),
-    );
-  }
-
-  Widget _optionsSelectKirtasiye(String optionName) {
-    return Expanded(
-      child: SizedBox(
-        height: 50,
-        child: InkWell(
-          onTap: () {
-            _pageController.nextPage(duration:const  Duration(seconds: 1), curve: Curves.slowMiddle);
-          },
-          highlightColor: Colors.transparent,
-          splashFactory: NoSplash.splashFactory,
-          child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 15,
-              child: Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  optionName,
-                ),
-              )),
-        ),
-      ),
     );
   }
 
