@@ -33,12 +33,13 @@ class DatabaseModel{
 
   DatabaseModel.fromJson(Map m){
     token = m["token"];
-    id = int.tryParse(m["id"].toString())!;
-    name = m["username"]; // user ve stationery için farklı olacak 
-    mail = m["mail"];
-    phone = m["phone"];
-    image = m["image"];
-    role = m["role"];
+    var data = m["data"];
+    id = int.tryParse(data["Id"].toString())!;
+    name = data["Username"]; // user ve stationery için farklı olacak 
+    mail = data["Mail"];
+    phone = data["Phone"];
+    image = data["Image"];
+    role = data["Role"];
     // şimdilik bu şekilde çalışıyor    
   }
 }
