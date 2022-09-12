@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kirtasite/screens/login-register/first_page.dart';
 
-import 'Custom/color.dart';
-import 'screens/login-register/first_page.dart';
-
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,15 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        appBarTheme: const AppBarTheme(
-          elevation:0,
-          backgroundColor: Colors.transparent,
-
-        ),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      home:const FirstPage(),
+      home: FirstPage(),
     );
   }
 }
