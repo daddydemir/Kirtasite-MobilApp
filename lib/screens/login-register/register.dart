@@ -14,8 +14,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final _pageController = PageController();
+  int _index = 0;
   bool _selectedIndex = false;
   bool _secureText = true;
 
@@ -24,7 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
       _selectedIndex = !_selectedIndex;
     });
   }
-  void _changeSecureText(){
+
+  void _changeSecureText() {
     setState(() {
       _secureText = !_secureText;
     });
@@ -52,25 +53,27 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: CustomColors().rubberDuckyYellow,
                     ),
               ),
-              const SizedBox(height: 50),
-              Row(
-                children: [
-                  _optionsSelectUser(CustomContent().user),
-                  _optionsSelectKirtasiye(CustomContent().kirtasite),
-                ],
-              ),
-              const SizedBox(height:20),
+              const SizedBox(height: 20),
               SizedBox(
-                height: 300,
-                child: PageView(
+                height: 450,
+                child: PageView.builder(
                   controller: _pageController,
-                  children: [
-                    _userRegister(),
-                    const Center(
-                        child: Text("Önce Adres eklememiz gerekiyor.")),
-                  ],
+                  itemCount: 2,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _userRegister();
+                  },
+                  onPageChanged: (int index) {
+                    setState(() {
+                      _index = index;
+                    });
+                  },
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _buildPageIndicator(),
+              ),
+              const SizedBox(height: 50),
               TextButton(
                 onPressed: () {},
                 style: CustomButton().buttonStyle,
@@ -85,6 +88,42 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildPageIndicator() {
+    List<Widget> list = [];
+    for (int i = 0; i < 2; i++) {
+      list.add(i == _index ? _indicator(true) : _indicator(false));
+    }
+    return list;
+  }
+
+  Widget _indicator(bool isActive) {
+    return SizedBox(
+      height: 10,
+      child: AnimatedContainer(
+        duration: CustomDuration().ms150,
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        height: isActive ? 10 : 8,
+        width: isActive ? 12 : 8,
+        decoration: BoxDecoration(
+          boxShadow: [
+            isActive
+                ? BoxShadow(
+                    color: CustomColors().brightGold.withOpacity(0.72),
+                    blurRadius: 4,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 0),
+                  )
+                : const BoxShadow(
+                    color: Colors.transparent,
+                  ),
+          ],
+          shape: BoxShape.circle,
+          color: isActive ? CustomColors().brightGold : CustomColors().quillGrey,
         ),
       ),
     );
@@ -124,9 +163,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () {
                   _changeSecureText();
                 },
-                icon:Icon(
-                  _secureText ? Icons.visibility_outlined : Icons.visibility_off_outlined
-                ),
+                icon: Icon(_secureText
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined),
               ),
             ),
           ),
@@ -135,74 +174,10 @@ class _RegisterPageState extends State<RegisterPage> {
           keyboardType: TextInputType.phone,
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(
-            hintText: CustomContent().telNo,
-            prefix: Text(CustomContent().telNoStart)
-          ),
+              hintText: CustomContent().telNo,
+              prefix: Text(CustomContent().telNoStart)),
         ),
       ],
-    );
-  }
-
-  Widget _optionsSelectUser(String optionName) {
-    return Expanded(
-      child: SizedBox(
-        height: 50,
-        child: InkWell(
-          onTap: () {
-            _pageController.previousPage(
-                duration: CustomDuration().ms500, curve: Curves.slowMiddle);
-            _changeIndex();
-          },
-          highlightColor: Colors.transparent,
-          splashFactory: NoSplash.splashFactory,
-          child: Card(
-            color: !_selectedIndex
-                ? CustomColors().rubberDuckyYellow
-                : CustomColors().beyaz,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            elevation: 15,
-            child: const Center(
-              child: Text(
-                "deneme",
-                textAlign: TextAlign.center,
-                //optionName,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _optionsSelectKirtasiye(String optionName) {
-    return Expanded(
-      child: SizedBox(
-        height: 50,
-        child: InkWell(
-          onTap: () {
-            _pageController.nextPage(
-                duration: CustomDuration().ms500, curve: Curves.slowMiddle);
-            _changeIndex();
-          },
-          highlightColor: Colors.transparent,
-          splashFactory: NoSplash.splashFactory,
-          child: Card(
-              color: _selectedIndex
-                  ? CustomColors().rubberDuckyYellow
-                  : CustomColors().beyaz,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 15,
-              child:const Center(
-                child: Text(
-                  "test",
-                  textAlign: TextAlign.center,
-                  //optionName,
-                ),
-              )),
-        ),
-      ),
     );
   }
 }
