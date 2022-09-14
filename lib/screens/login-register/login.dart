@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:kirtasite/Custom/content.dart';
 import 'package:kirtasite/Custom/size.dart';
+import 'package:kirtasite/services/loginService.dart';
 
 import '../../Custom/button.dart';
 import '../../Custom/color.dart';
@@ -13,8 +16,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   
-  final _pageController = PageController();
-
+  var _mail = TextEditingController();
+  var _password = TextEditingController();
   bool secureText = true;
   
   void changeSecureText() {
@@ -66,7 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  _login();
+                },
                 style: CustomButton().buttonStyle,
                 child: Text(CustomContent().login,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -87,12 +92,15 @@ class _LoginPageState extends State<LoginPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
+          keyboardType:  TextInputType.emailAddress,
+          controller: _mail,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            hintText: CustomContent().username,
+            hintText: CustomContent().mail,
           ),
         ),
         TextField(
+          controller: _password,
           textInputAction: TextInputAction.done,
           obscureText: secureText,
           obscuringCharacter: "*",
@@ -109,6 +117,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ],
     );
+  }
+
+  void _login() async {
+    var service = LoginService();
+    await service.login(_mail.text, _password.text);
+    // _mail.clear();
+    // _password.clear();
   }
 
 }

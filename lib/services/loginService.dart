@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 
 import 'dart:convert';
 
@@ -19,27 +19,21 @@ class LoginService{
         var temp = r["data"];
         temp = temp["User"];
         temp = temp["Role"];
-        print(temp["Name"]);
+        DatabaseModel dm = DatabaseModel.Empty();
+        var model;
         if(temp["Name"] == "CUSTOMER"){
-          var model = CustomerModel.fromJson(r["data"]);
-          print(model.toString());
+          model = CustomerModel.fromJson(r["data"]);
+          dm = DatabaseModel.CustomerAdapter(model, r["token"]);
         }else if(temp["Name"] == "STATIONERY"){
-          var model = StationeryModel.fromJson(r["data"]);
+          model = StationeryModel.fromJson(r["data"]);
+          dm = DatabaseModel.StationeryAdapter(model, r["token"]);
         }
-        var model = DatabaseModel.fromJson(r);
-        await db.InsertData(model);
-        print(model.name);
-        // sadece token geliyor .
-        // login olan kişiye ait veriyi de dönmem gerekiyor.
-        // önce bu güncellemeyi yapıp tekrar deneyeceğim.
-
-        // 17.05.2022 : Güncelleme yaptım gelen veri tam kaydetmek istediğim gibi
-        // gelen veriyi local veritabanına kaydetmem lazım
-        // gelen veri kaydedildi
+        LocalData service = LocalData();
+        await service.InsertData(dm);
       }else{
         var r = json.decode(utf8.decode(response.bodyBytes));
         print(r["message"]);
-        print("KOD: " + response.statusCode.toString());
+        print("KOD: ${response.statusCode}");
       }
     });
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kirtasite/screens/login-register/first_page.dart';
+import 'package:kirtasite/screens/test/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           backgroundColor:Colors.transparent
         ),
       ),
-      home: FirstPage(),
+      home:FirstPage(),
     );
   }
 }
