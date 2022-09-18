@@ -39,6 +39,9 @@ dependencies:
   # Network
   http:
 
+  # icons
+  iconsax: ^0.0.8
+
 
 
 

@@ -11,4 +11,5 @@ class CustomColors{
   final baseBlack = const Color(0xff1a283a);
 
   final beyaz = const Color(0xffffffff);
+  final saydam = const Color(0x21ffffff);
 }

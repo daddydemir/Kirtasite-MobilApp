@@ -1,11 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:kirtasite/Custom/size.dart';
 import 'package:kirtasite/components/blurEffect.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({Key? key, required this.body});
+
+  final Widget body;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
@@ -19,9 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: BlurEffect(
         body: Container(
           height: MediaQuery.of(context).size.height * 0.07,
-          decoration: const BoxDecoration(
-            color: Color(0x00ffffff),
-          ),
+          child: widget.body,
         ),
       ),
     );
