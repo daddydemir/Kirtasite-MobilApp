@@ -3,6 +3,9 @@ import 'package:kirtasite/Custom/color.dart';
 import 'package:kirtasite/Custom/size.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kirtasite/components/bottomNavBar.dart';
+import 'package:kirtasite/screens/main.dart';
+import 'package:kirtasite/screens/orders/order_main.dart';
+import 'package:kirtasite/screens/settings/settings_main.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,10 +16,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int pageIndex = 0;
-  List<Widget> _pages = [
-    Text(" das" * 100),
-    Center(),
-    Text("18 Sep" * 1000),
+  final List<Widget> _pages = const [
+    Main(),
+    OrderMain(),
+    SettingsMain(),
   ];
   @override
   Widget build(BuildContext context) {
