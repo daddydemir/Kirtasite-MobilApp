@@ -1,9 +1,8 @@
-
-class CustomContent{
-
+class CustomContent {
   final String login = "Oturum Aç";
   final String register = "Kayıt Ol";
-  final String kitasiteInfo = """Kırtasite uygulaması sayesinde kıtasiyelerde sıra beklemene gerek kalmaz,
+  final String kitasiteInfo =
+      """Kırtasite uygulaması sayesinde kıtasiyelerde sıra beklemene gerek kalmaz,
   sen siparişini ver hazır olunca biz sana haber verelim. Böylelikle zamanını daha verimli kullnmış olursun.""";
   final String username = "Kullanıcı Adı";
   final String password = "Parola";
@@ -16,7 +15,8 @@ class CustomContent{
   final String telNo = "Telefon";
   final String telNoStart = "+90 ";
   final String adresHeader = "Adres Başlığı";
+  final String siparisVer = "Sipariş \nver";
+  final String yorumOku = "Yorumları \nincele";
 
   static String baseUrl = "http://2.59.117.205:1337/api/v1/";
-
 }

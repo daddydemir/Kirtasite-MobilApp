@@ -3,7 +3,7 @@ import 'package:kirtasite/Custom/color.dart';
 import 'package:kirtasite/Custom/size.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kirtasite/components/bottomNavBar.dart';
-import 'package:kirtasite/screens/main.dart';
+import 'package:kirtasite/screens/home/main.dart';
 import 'package:kirtasite/screens/orders/order_main.dart';
 import 'package:kirtasite/screens/settings/settings_main.dart';
 

@@ -1,3 +1,4 @@
+import 'package:kirtasite/models/responseModels/address.dart';
 import 'package:kirtasite/models/responseModels/user.dart';
 
 class StationeryModel {
@@ -6,6 +7,7 @@ class StationeryModel {
   String? companyName;
   double? score;
   UserModel? user;
+  AddressModel? address;
 
   StationeryModel({this.userId, this.addressId, this.companyName, this.score});
 
@@ -15,6 +17,7 @@ class StationeryModel {
     companyName = json['CompanyName'];
     score = json['Score'];
     user = json['User'] != null ? UserModel.fromJson(json['User']) : null;
+    address = json['Address'] != null ? AddressModel.fromJson(json['Address']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,6 +28,9 @@ class StationeryModel {
     data['Score'] = score;
     if(user != null){
       data['User'] = user!.toJson();
+    }
+    if(address != null){
+      data["Address"] = address!.toJson();
     }
     return data;
   }
