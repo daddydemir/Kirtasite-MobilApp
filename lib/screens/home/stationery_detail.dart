@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:kirtasite/Custom/color.dart';
 import 'package:kirtasite/Custom/content.dart';
 import 'package:kirtasite/Custom/size.dart';
+import 'package:kirtasite/models/responseModels/price.dart';
 import 'package:kirtasite/models/responseModels/stationery.dart';
+import 'package:kirtasite/services/priceService.dart';
 
 class StationeryDetail extends StatefulWidget {
   const StationeryDetail({Key? key, required this.stationery})
@@ -15,6 +17,21 @@ class StationeryDetail extends StatefulWidget {
 }
 
 class _StationeryDetailState extends State<StationeryDetail> {
+  List<PriceModel> fiyatlar = <PriceModel>[];
+  var service = PriceService();
+
+  void _dataSet() async {
+    fiyatlar = await service.getPricesByStationeryId(widget.stationery.userId)
+        as List<PriceModel>;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _dataSet();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +40,10 @@ class _StationeryDetailState extends State<StationeryDetail> {
           Iconsax.arrow_left_24,
           color: CustomColors().baseBlack,
         ),
-        title: Text(widget.stationery.companyName.toString(),
-            style: Theme.of(context).textTheme.titleLarge),
+        title: Text(
+          widget.stationery.companyName.toString(),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -43,6 +62,29 @@ class _StationeryDetailState extends State<StationeryDetail> {
                     widget.stationery.user!.imagePath.toString(),
                   ),
                   fit: BoxFit.cover,
+                ),
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: CustomSize().textPadding,
+                      child: Icon(
+                        Iconsax.star,
+                        color: CustomColors().rubberDuckyYellow,
+                      ),
+                    ),
+                    Padding(
+                      padding: CustomSize().textPadding,
+                      child: Text(
+                        widget.stationery.score.toString(),
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: CustomColors().rubberDuckyYellow),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -128,8 +170,69 @@ class _StationeryDetailState extends State<StationeryDetail> {
                 ],
               ),
             ),
+            const SizedBox(height: 30),
+            fiyatlar.isEmpty
+                ? const CircularProgressIndicator()
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: PageView.builder(
+                      itemCount: fiyatlar.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: CustomSize().paddingHorizontal,
+                          child: _body(index),
+                        );
+                      },
+                    ),
+                  ),
+            const Text("ADDRESS ADD TODO:"),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _body(int id) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.3,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            CustomColors().topaz,
+            CustomColors().baseBlack,
+          ],
+        ),
+      ),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: CustomSize().paddingx10,
+              child: Text(
+                fiyatlar[id].info.toString(),
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: CustomSize().paddingx10,
+              child: Text(
+                fiyatlar[id].price.toString() + " ₺",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(color: CustomColors().beyaz),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
