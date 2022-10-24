@@ -10,9 +10,9 @@ class CustomColors{
 
   final baseBlack = const Color(0xff1a283a);
 
-  final beyaz = const Color(0xffffffff);
+  final beyaz =  Colors.white;
   final saydam = const Color(0x21ffffff);
 
-  final purpleHeart = Color.fromARGB(255, 126, 47, 211);
+  final purpleHeart = const Color.fromARGB(255, 126, 47, 211);
   final topaz = const Color(0xff16b6bb);
 }

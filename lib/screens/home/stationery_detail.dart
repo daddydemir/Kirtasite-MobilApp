@@ -141,8 +141,8 @@ class _StationeryDetailState extends State<StationeryDetail> {
                       child: Row(
                         children: [
                           SizedBox(
-                            width: 75,
-                            height: 75,
+                            width: 70,
+                            height: 70,
                             child: Card(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100),
