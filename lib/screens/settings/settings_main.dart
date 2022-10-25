@@ -16,9 +16,6 @@ class _SettinsHomeState extends State<SettingsMain> {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.amberAccent,
-        // ),
         backgroundColor: CustomColors().beyaz,
         body: SingleChildScrollView(
           child: SizedBox(
